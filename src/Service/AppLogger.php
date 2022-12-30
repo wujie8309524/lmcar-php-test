@@ -19,21 +19,14 @@ class AppLogger
             $this->logger = \Logger::getLogger("Log");
         }else if($type == self::THINK_LOG){
             //代理模式
-            $logManager = new LogManager();
-            $logManager->init([
-                'default'      => 'file',
-                'channels'    =>    [
-                    'file'    =>    [
-                        'type'          => 'file',
-                        'path'          => '../../logs/',
-                    ],
-                ],
-            ]);
             $loggerProxy = new LoggerProxy();
-            $loggerProxy->setLogger($logManager);
-
+            $loggerProxy->setLogger(new LogManager());
             $this->logger = $loggerProxy;
         }
+    }
+
+    public function getLogger(){
+        return $this->logger;
     }
 
     public function info($message = '')

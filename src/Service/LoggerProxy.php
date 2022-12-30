@@ -10,6 +10,10 @@ class LoggerProxy
         $this->logger = $logger;
     }
 
+    public function init($config){
+        $this->logger->init($config);
+    }
+
     public function info($message = '')
     {
         $this->logger->info(strtoupper($message));
